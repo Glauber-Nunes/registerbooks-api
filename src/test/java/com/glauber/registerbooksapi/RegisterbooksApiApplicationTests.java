@@ -1,4 +1,4 @@
-package com.glauber.registerbooksAPI;
+package com.glauber.registerbooksapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
