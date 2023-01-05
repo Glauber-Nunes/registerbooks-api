@@ -5,12 +5,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
-@Table(name = "tb_categoria")
+@Table(name = "tabela_categoria")
 public class Categoria implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,10 +26,6 @@ public class Categoria implements Serializable {
     @Getter
     @Setter
     private String descricao ;
-
-    @Getter
-    @OneToMany(mappedBy = "categoria")
-    private List<Livro> livros = new ArrayList<>();
 
     public Categoria(){
 

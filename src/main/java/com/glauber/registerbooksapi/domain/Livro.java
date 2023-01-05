@@ -1,14 +1,17 @@
 package com.glauber.registerbooksapi.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Table(name = "tb_livro")
+@Table(name = "tabela_livro")
 public class Livro implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -19,6 +22,7 @@ public class Livro implements Serializable {
     private Long id;
     @Getter
     @Setter
+    //SERVE PARA MUDAR NOME DA COLUNA NO BANCO @Column(name = "`titu`")
     private String titulo;
     @Getter
     @Setter
@@ -26,17 +30,15 @@ public class Livro implements Serializable {
     @Getter
     @Setter
     private String texto;
-
+    @OneToOne
     @Getter
     @Setter
-    @ManyToOne
-    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
     public Livro(){
 
     }
-    public Livro(Long id, String titulo, String nome_autor, String texto, Categoria categoria) {
+    public Livro(Long id, String titulo, String nome_autor, String texto,Categoria categoria) {
         this.id = id;
         this.titulo = titulo;
         this.nome_autor = nome_autor;
