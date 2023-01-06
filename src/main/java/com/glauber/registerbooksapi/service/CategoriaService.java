@@ -18,6 +18,7 @@ public class CategoriaService {
 
     public Categoria buscaPeloId(Long id) {
 
+        //PESQUISO NO BANCO DE DADOS SE EXISTE OU NAO, SE EXISTE ME RETORNA SE NAO ME LANÇA EXCESSAO
         Optional<Categoria> categoriaOptional = categoriaRepository.findById(id);
 
         categoriaOptional.orElseThrow(()-> new EntityNotFound("Categoria Nao Existe"));

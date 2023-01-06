@@ -1,5 +1,6 @@
 package com.glauber.registerbooksapi.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,6 +28,11 @@ public class Categoria implements Serializable {
     @Setter
     private String descricao ;
 
+    @OneToMany(mappedBy = "categoria")
+    @Getter
+    @Setter
+    private List<Livro> livros = new ArrayList<>();
+
     public Categoria(){
 
     }
@@ -35,6 +41,12 @@ public class Categoria implements Serializable {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
+    }
+
+    public void addLivros (Livro livro){
+
+        this.livros.add(livro);
+
     }
 
     @Override
