@@ -1,4 +1,4 @@
-package com.glauber.registerbooksapi.exceptionsResource;
+package com.glauber.registerbooksapi.resources.exceptions;
 
 import lombok.Data;
 

@@ -1,14 +1,13 @@
 package com.glauber.registerbooksapi.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "tabela_livro")
@@ -26,13 +25,15 @@ public class Livro implements Serializable {
     private String titulo;
     @Getter
     @Setter
-    private String nome_autor;
+    private String nome_autor;							
     @Getter
     @Setter
     private String texto;
-    @OneToOne
-    @Getter
+
     @Setter
+    @Getter
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
     public Livro(){
