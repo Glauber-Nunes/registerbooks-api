@@ -30,8 +30,11 @@ public class Livro implements Serializable {
     @Setter
     private String texto;
 
+<<<<<<< HEAD
     @Setter
     @Getter
+=======
+>>>>>>> 9b7125d04cfec2bf2f48e9c8cf2a4aa15aa9a629
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;

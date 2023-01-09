@@ -22,7 +22,12 @@ public class CategoriaService {
 		// LANÇA EXCESSAO
 		Optional<Categoria> categoriaOptional = categoriaRepository.findById(id);
 
+<<<<<<< HEAD
 		categoriaOptional.orElseThrow(() -> new EntityNotFound("Categoria Nao Existe"));
+=======
+        //PESQUISO NO BANCO DE DADOS SE EXISTE OU NAO, SE EXISTE ME RETORNA SE NAO ME LANÇA EXCESSAO
+        Optional<Categoria> categoriaOptional = categoriaRepository.findById(id);
+>>>>>>> 9b7125d04cfec2bf2f48e9c8cf2a4aa15aa9a629
 
 		return categoriaOptional.get();
 	}
