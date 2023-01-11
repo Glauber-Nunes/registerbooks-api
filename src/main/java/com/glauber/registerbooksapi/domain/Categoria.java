@@ -1,6 +1,5 @@
 package com.glauber.registerbooksapi.domain;
 
-<<<<<<< HEAD
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +13,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-=======
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
->>>>>>> 9b7125d04cfec2bf2f48e9c8cf2a4aa15aa9a629
 import lombok.Getter;
 import lombok.Setter;
 
@@ -44,10 +39,8 @@ public class Categoria implements Serializable {
     @OneToMany(mappedBy = "categoria")
     @Getter
     @Setter
-<<<<<<< HEAD
+
     @JsonIgnore
-=======
->>>>>>> 9b7125d04cfec2bf2f48e9c8cf2a4aa15aa9a629
     private List<Livro> livros = new ArrayList<>();
 
     public Categoria(){
@@ -60,14 +53,12 @@ public class Categoria implements Serializable {
         this.descricao = descricao;
     }
 
-<<<<<<< HEAD
-=======
+
     public void addLivros (Livro livro){
 
         this.livros.add(livro);
 
     }
->>>>>>> 9b7125d04cfec2bf2f48e9c8cf2a4aa15aa9a629
 
     @Override
     public boolean equals(Object o) {

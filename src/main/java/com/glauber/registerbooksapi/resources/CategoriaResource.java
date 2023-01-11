@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.glauber.registerbooksapi.DTOs.CategoriaDTO;
@@ -52,17 +53,26 @@ public class CategoriaResource {
 	public ResponseEntity<CategoriaDTO> update(@PathVariable Long id, @RequestBody CategoriaDTO dto) {
 
 		CategoriaDTO newObj = categoriaService.update(id, dto);
-		
+
 		return ResponseEntity.ok().body(newObj);
-		
+
 	}
-	
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id){
-		
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
+
 		categoriaService.delete(id);
-		
+
 		return ResponseEntity.noContent().build();
-		
+
 	}
+
+	@GetMapping("/{filter}")
+	public ResponseEntity<List<Categoria>> findByNomeContains(@RequestParam("nome") String nome) {
+
+		List<Categoria> cat = categoriaService.findByNomeContains(nome);
+
+		return ResponseEntity.ok().body(cat);
+	}
+
 }

@@ -2,9 +2,11 @@ package com.glauber.registerbooksapi.service;
 
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+
 import com.glauber.registerbooksapi.DTOs.CategoriaDTO;
 import com.glauber.registerbooksapi.domain.Categoria;
 import com.glauber.registerbooksapi.repositories.CategoriaRepository;
@@ -22,12 +24,9 @@ public class CategoriaService {
 		// LANÇA EXCESSAO
 		Optional<Categoria> categoriaOptional = categoriaRepository.findById(id);
 
-<<<<<<< HEAD
 		categoriaOptional.orElseThrow(() -> new EntityNotFound("Categoria Nao Existe"));
-=======
-        //PESQUISO NO BANCO DE DADOS SE EXISTE OU NAO, SE EXISTE ME RETORNA SE NAO ME LANÇA EXCESSAO
-        Optional<Categoria> categoriaOptional = categoriaRepository.findById(id);
->>>>>>> 9b7125d04cfec2bf2f48e9c8cf2a4aa15aa9a629
+		// PESQUISO NO BANCO DE DADOS SE EXISTE OU NAO, SE EXISTE ME RETORNA SE NAO ME
+		// LANÇA EXCESSAO
 
 		return categoriaOptional.get();
 	}
@@ -77,4 +76,13 @@ public class CategoriaService {
 		}
 
 	}
+
+	public List<Categoria> findByNomeContains(String nome) {
+		
+		List<Categoria> cats = categoriaRepository.findByNomeContains(nome);
+		
+		return cats;
+	}
+
+	
 }
