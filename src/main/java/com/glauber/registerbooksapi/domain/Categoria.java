@@ -39,7 +39,6 @@ public class Categoria implements Serializable {
     @OneToMany(mappedBy = "categoria")
     @Getter
     @Setter
-
     @JsonIgnore
     private List<Livro> livros = new ArrayList<>();
 

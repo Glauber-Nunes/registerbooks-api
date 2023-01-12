@@ -12,6 +12,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LivroRepository extends JpaRepository<Livro, Long> {
 
-	@Query("SELECT obj FROM Livro obj WHERE obj.categoria.id = :id_cat ORDER BY titulo")
-	List<Livro> findAllCategoria(@Param(value = "id_cat") Long id_cat);
+	@Query("SELECT obj FROM Livro obj WHERE obj.categoria.id = :id_cat ORDER BY id")
+	List<Livro> findAllLivroPerCategoria(@Param(value = "id_cat") Long id_cat);
 }

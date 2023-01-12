@@ -30,19 +30,11 @@ public class LivroService {
 	}
 
 	// PESQUISA TODOS OS LIVROS DE DETERMINADA CATEGORIA PESQUISADA PELO ID
-	public List<Livro> findAllCategoria(Long id_cat) {
+	public List<Livro> findAllLivroPerCategoria(Long id_cat) {
 
 		categoriaService.findById(id_cat); // PESQUISA CATEGORIA NO BANCO PASSANDO O ID
 
-		return livroRepository.findAllCategoria(id_cat);
-
-	}
-
-	public Livro create(Livro livro, Categoria categoria) {
-
-		Livro lv = livroRepository.save(livro);
-
-		return lv;
+		return livroRepository.findAllLivroPerCategoria(id_cat);
 
 	}
 
@@ -62,5 +54,23 @@ public class LivroService {
 		newObj.setNome_autor(livro.getNome_autor());
 		newObj.setTexto(livro.getTexto());
 		newObj.setCategoria(livro.getCategoria());
+	}
+
+	public Livro create(Long id_cate, Livro livro) {
+		livro.setId(null);
+
+		Categoria categoria = categoriaService.findById(id_cate);
+
+		livro.setCategoria(categoria);
+
+		return livroRepository.save(livro);
+	}
+
+	public void delete(Long id) {
+
+		Livro obj = findById(id);
+
+		livroRepository.delete(obj);
+
 	}
 }
