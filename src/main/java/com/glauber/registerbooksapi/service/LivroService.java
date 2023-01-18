@@ -29,7 +29,8 @@ public class LivroService {
 		return obj.get();
 	}
 
-	// PESQUISA TODOS OS LIVROS DE DETERMINADA CATEGORIA PESQUISADA PELO ID
+	// PESQUISA TODOS OS LIVROS DE DETERMINADA CATEGORIA PESQUISADA PELO ID COM
+	// QUERY CUSTOMER
 	public List<Livro> findAllLivroPerCategoria(Long id_cat) {
 
 		categoriaService.findById(id_cat); // PESQUISA CATEGORIA NO BANCO PASSANDO O ID
@@ -40,7 +41,7 @@ public class LivroService {
 
 	public Livro update(Long id, Livro livro) {
 
-		Livro newObj = findById(id);
+		Livro newObj = this.findById(id);
 		updateDataLivro(newObj, livro);
 
 		return livroRepository.save(newObj);
@@ -60,7 +61,6 @@ public class LivroService {
 		livro.setId(null);
 
 		Categoria categoria = categoriaService.findById(id_cate);
-
 		livro.setCategoria(categoria);
 
 		return livroRepository.save(livro);
@@ -68,7 +68,7 @@ public class LivroService {
 
 	public void delete(Long id) {
 
-		Livro obj = findById(id);
+		Livro obj = this.findById(id);
 
 		livroRepository.delete(obj);
 

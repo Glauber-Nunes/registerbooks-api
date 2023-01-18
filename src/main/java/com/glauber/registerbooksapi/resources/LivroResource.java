@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -17,20 +18,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.glauber.registerbooksapi.DTOs.LivroDTO;
-import com.glauber.registerbooksapi.domain.Categoria;
 import com.glauber.registerbooksapi.domain.Livro;
-import com.glauber.registerbooksapi.service.CategoriaService;
 import com.glauber.registerbooksapi.service.LivroService;
 
+import jakarta.validation.Valid;
+
+@CrossOrigin("*") // ANOTAÇAO PARA O FRONT END ANGULAR
 @RestController
 @RequestMapping("/livros")
 public class LivroResource {
 
 	@Autowired()
 	private LivroService livroService;
-
-	@Autowired
-	private CategoriaService categoriaService;
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Livro> findById(@PathVariable Long id) {
@@ -56,14 +55,14 @@ public class LivroResource {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Livro> update(@PathVariable Long id, @RequestBody Livro livro) {
+	public ResponseEntity<Livro> update(@PathVariable Long id, @Valid @RequestBody Livro livro) {
 		Livro obj = livroService.update(id, livro);
 
 		return ResponseEntity.ok().body(obj);
 	}
 
 	@PatchMapping("/{id}")
-	public ResponseEntity<Livro> updatePatch(@PathVariable Long id, @RequestBody Livro livro) {
+	public ResponseEntity<Livro> updatePatch(@PathVariable Long id, @Valid @RequestBody Livro livro) {
 		Livro obj = livroService.update(id, livro);
 
 		return ResponseEntity.ok().body(obj);
@@ -71,7 +70,7 @@ public class LivroResource {
 
 	@PostMapping
 	public ResponseEntity<Livro> create(@RequestParam(value = "categoria", defaultValue = "0") Long id_cate,
-			@RequestBody Livro livro) {
+			@Valid @RequestBody Livro livro) {
 
 		Livro obj = livroService.create(id_cate, livro);
 

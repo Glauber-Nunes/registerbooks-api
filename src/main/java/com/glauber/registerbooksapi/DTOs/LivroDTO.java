@@ -10,6 +10,7 @@ public class LivroDTO {
 	@Getter
 	@Setter
 	private Long id;
+	
 	@Getter
 	@Setter
 	private String titulo;

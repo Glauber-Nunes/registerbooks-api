@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,13 +12,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.glauber.registerbooksapi.DTOs.CategoriaDTO;
 import com.glauber.registerbooksapi.domain.Categoria;
 import com.glauber.registerbooksapi.service.CategoriaService;
 
+import jakarta.validation.Valid;
+
+@CrossOrigin("*") // ANOTAÇAO PARA O FRONT END ANGULAR
 @RestController
 @RequestMapping("/categorias")
 public class CategoriaResource {
@@ -42,7 +45,7 @@ public class CategoriaResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<Categoria> save(@RequestBody Categoria categoria) {
+	public ResponseEntity<Categoria> save(@Valid @RequestBody Categoria categoria) {
 
 		Categoria cat = categoriaService.save(categoria);
 
@@ -50,7 +53,7 @@ public class CategoriaResource {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<CategoriaDTO> update(@PathVariable Long id, @RequestBody CategoriaDTO dto) {
+	public ResponseEntity<CategoriaDTO> update(@Valid @PathVariable Long id, @RequestBody CategoriaDTO dto) {
 
 		CategoriaDTO newObj = categoriaService.update(id, dto);
 
@@ -59,20 +62,11 @@ public class CategoriaResource {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id) {
+	public ResponseEntity<String> delete(@PathVariable Long id) {
 
 		categoriaService.delete(id);
 
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.ok().body("Categoria Deletado Com Sucesso ID: " + id + Categoria.class.getName());
 
 	}
-
-	@GetMapping("/{filter}")
-	public ResponseEntity<List<Categoria>> findByNomeContains(@RequestParam("nome") String nome) {
-
-		List<Categoria> cat = categoriaService.findByNomeContains(nome);
-
-		return ResponseEntity.ok().body(cat);
-	}
-
 }

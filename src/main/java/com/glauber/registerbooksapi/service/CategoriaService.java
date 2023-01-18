@@ -52,7 +52,7 @@ public class CategoriaService {
 	public CategoriaDTO update(Long id, CategoriaDTO dto) {
 
 		// obj RECEBE A PESQUISA DO BANCO E RETORNA O OBJETO OU A EXCESSAO
-		Categoria obj = findById(id);
+		Categoria obj = this.findById(id);
 
 		obj.setNome(dto.getNome());
 		obj.setDescricao(dto.getDescricao());
@@ -63,11 +63,11 @@ public class CategoriaService {
 
 	}
 
+	// localhost:8086/categorias/id
 	public void delete(Long id) {
 
-		findById(id);
-
 		try {
+			findById(id);
 			categoriaRepository.deleteById(id);
 
 		} catch (DataIntegrityViolationException e) {
@@ -77,12 +77,4 @@ public class CategoriaService {
 
 	}
 
-	public List<Categoria> findByNomeContains(String nome) {
-		
-		List<Categoria> cats = categoriaRepository.findByNomeContains(nome);
-		
-		return cats;
-	}
-
-	
 }
