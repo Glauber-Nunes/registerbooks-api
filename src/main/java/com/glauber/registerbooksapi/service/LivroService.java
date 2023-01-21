@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.glauber.registerbooksapi.domain.Categoria;
 import com.glauber.registerbooksapi.domain.Livro;
 import com.glauber.registerbooksapi.repositories.LivroRepository;
+import com.glauber.registerbooksapi.resources.exceptions.FieldUnique;
 import com.glauber.registerbooksapi.service.excptions.EntityNotFound;
 
 @Service
@@ -58,12 +60,19 @@ public class LivroService {
 	}
 
 	public Livro create(Long id_cate, Livro livro) {
-		livro.setId(null);
 
-		Categoria categoria = categoriaService.findById(id_cate);
-		livro.setCategoria(categoria);
+		try {
+			livro.setId(null);
+			Categoria categoria = categoriaService.findById(id_cate);
+			livro.setCategoria(categoria);
 
-		return livroRepository.save(livro);
+			return livroRepository.save(livro);
+
+		} catch (DataIntegrityViolationException e) {
+
+			throw new FieldUnique("CAMPO DUPLICADO");
+		}
+
 	}
 
 	public void delete(Long id) {

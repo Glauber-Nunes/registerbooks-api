@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import org.hibernate.validator.constraints.Length;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,6 +32,7 @@ public class Livro implements Serializable {
 	@Setter
 	@NotEmpty(message = "Campo TITULO Deve Ser Informado")
 	@Length(min = 5, max = 30, message = "Informe Um TITULO Com no minimo 5 Caracteres e no Maximo 30 Caracteres")
+	@Column(unique = true)
 	private String titulo;
 	
 	@Getter

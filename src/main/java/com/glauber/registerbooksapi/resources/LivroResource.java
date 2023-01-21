@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -72,9 +73,8 @@ public class LivroResource {
 	public ResponseEntity<Livro> create(@RequestParam(value = "categoria", defaultValue = "0") Long id_cate,
 			@Valid @RequestBody Livro livro) {
 
-		Livro obj = livroService.create(id_cate, livro);
-
-		return ResponseEntity.ok().body(obj);
+		return ResponseEntity.status(HttpStatus.CREATED).
+				body(livroService.create(id_cate, livro));
 
 	}
 

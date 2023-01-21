@@ -64,5 +64,19 @@ public class ResourceExceptionHandller {
 
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
 	}
+	
+//	@ExceptionHandler(FieldUnique.class)
+//	public ResponseEntity<StandardError> valorUniqueException(FieldUnique e, HttpServletRequest request) {
+//
+//		StandardError erro = new StandardError();
+//
+//		erro.setTimestamp(Instant.now());
+//		erro.setStatus(HttpStatus.CONFLICT.value());
+//		erro.setError("ERRO DE VALOR DUPLICADO");
+//		erro.setMessenger(e.getMessage());
+//		erro.setPath(request.getRequestURI());
+//
+//		return ResponseEntity.status(HttpStatus.CONFLICT).body(erro);
+//	}
 
 }

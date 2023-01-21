@@ -2,11 +2,11 @@ package com.glauber.registerbooksapi.service;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import com.glauber.registerbooksapi.DTOs.CategoriaDTO;
 import com.glauber.registerbooksapi.domain.Categoria;
 import com.glauber.registerbooksapi.repositories.CategoriaRepository;
@@ -41,11 +41,13 @@ public class CategoriaService {
 		// CategoriaDTO(obj)).toList();
 	}
 
-	public Categoria save(Categoria categoria) {
+	public Object save(Categoria categoria) {
 
-		Categoria cat = categoriaRepository.save(categoria);
+		if (this.existsByNome(categoria.getNome())) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("ESSE NOME DE CATEGORIA JA EXISTE NA BASE DE DADOS");
+		}
 
-		return cat;
+		return categoriaRepository.save(categoria);
 
 	}
 
@@ -75,6 +77,10 @@ public class CategoriaService {
 					"Categoria Nao pode Ser Deletada Possui Livros Associados");
 		}
 
+	}
+
+	private boolean existsByNome(String nome) {
+		return categoriaRepository.existsByNome(nome);
 	}
 
 }

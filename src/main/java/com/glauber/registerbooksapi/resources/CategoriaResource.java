@@ -3,6 +3,8 @@ package com.glauber.registerbooksapi.resources;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -45,11 +47,10 @@ public class CategoriaResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<Categoria> save(@Valid @RequestBody Categoria categoria) {
+	public ResponseEntity<Object> save(@Valid @RequestBody Categoria categoria) {
 
-		Categoria cat = categoriaService.save(categoria);
-
-		return ResponseEntity.ok().body(cat);
+		return ResponseEntity.status(HttpStatus.CREATED).
+				body(categoriaService.save(categoria));
 	}
 
 	@PutMapping("/{id}")
